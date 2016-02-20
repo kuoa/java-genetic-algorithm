@@ -7,27 +7,36 @@ import java.util.Random;
 import pobj.algogen.arith.IndividuExpression;
 import pobj.arith.EnvVal;
 
+/**
+ * The population container.
+ * @author kuoa
+ *
+ */
+
 public class Population {
 
-	/** arrayList containg the individuals */
+	/** arrayList containig the individuals */	
 	private ArrayList<IIndividu> individus;
 
 	/** array size */
 	private int size = 0;
 
 	/** Initializing the individuals arrayList */
-
 	public Population() {
 		individus = new ArrayList<IIndividu>();
 	}
 
-	/** @return ArrayList size */
+	/**
+	 * Returns the population size.
+	 * @return the population size.
+	 */
 	public int size() {
 		return size;
 	}
 
 	/**
-	 * Add a @param individu to the current population
+	 * Adds a new individual to the current population.
+	 * @param individual
 	 */
 
 	void add(IIndividu individu) {
@@ -36,7 +45,11 @@ public class Population {
 		++size;
 	}
 
-	/** @return a string representation of the individuals */
+	/**
+	 * Returns a string representation of the individuals (IndividuDouble)
+	 * @return a string representation 
+	 */
+	
 	@Override
 	public String toString() {
 
@@ -48,6 +61,11 @@ public class Population {
 
 		return s;
 	}
+	/**
+	 * Returns a string representation of the individuals (IndividuExpression) 
+	 * @param e the array of expression variables
+	 * @return a string representation 	 
+	 */
 	
 	public String toString(EnvVal e) {
 
@@ -58,16 +76,19 @@ public class Population {
 			IndividuExpression ie = (IndividuExpression) i;
 			s += ie.toString(e) + "\n";
 		}
-
 		return s;
 	}
 
 	/**
-	 * Simulates the evolution of the current population, by creating a new @return
-	 * generation. We use a environnement @param e that allows the calculation
-	 * of the new fitness (survival of the fittest). We keep the %20 of the most
-	 * apt individuals and we allow them to reproduce in order to create the
-	 * next generation. Random mutations may also occur.
+	 * Simulates the evolution of the current population, by creating a new
+	 * generation. We use a environment that allows the calculation
+	 * of the new fitness (survival of the fittest). 
+	 * We keep the %20 of the most apt individuals and we allow them to reproduce 
+	 * in order to create the next generation. 
+	 * Mutations may also occur.
+	 *
+	 * @param e the evaluation environment
+	 * @return a new population
 	 */
 
 	public Population evoluer(Environnement e) {
@@ -77,6 +98,7 @@ public class Population {
 		int max = 15;
 
 		double prob = (r.nextInt(max - min + 1) + min) / 100.0;
+	
 		System.out.println("Probabilty of mutation: " + prob + " %");
 
 		evaluer(e);
@@ -92,7 +114,8 @@ public class Population {
 
 	/**
 	 * Updates the fitness of all the individuals present in the current
-	 * environment @param e
+	 * environment. 
+	 * @param e the evaluation environment
 	 */
 
 	public void evaluer(Environnement e) {
@@ -108,8 +131,8 @@ public class Population {
 	}
 
 	/**
-	 * Creates a new mutation of the current individual, based on a @param
-	 * probability
+	 * Creates a new mutation of the current individual, based on the probability of mutation. 
+	 * @param probability of mutation
 	 */
 
 	private void muter(double probability) {
@@ -139,7 +162,8 @@ public class Population {
 	/**
 	 * Creates a new population by simulating a reproduction behavior. We keep
 	 * the %20 of the most apt individuals and we allow them to reproduce in
-	 * order to create the @return next generation.
+	 * order to create the next generation. 
+	 * @return the next generation after reproduction
 	 */
 
 	private Population reproduire() {

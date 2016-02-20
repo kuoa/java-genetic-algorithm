@@ -20,7 +20,12 @@ public class OperateurBinaire implements Expression {
 		this.op = op;
 	}
 
-	/** Evaluates the current expressionn in the environment @parm e */
+	
+	/**
+	 * Evaluate the current expression
+	 * @param e the expression
+	 * @return the value of the expression
+	 */
 	
 	@Override
 	public double eval(EnvVal e) {
@@ -56,20 +61,28 @@ public class OperateurBinaire implements Expression {
 		return result;
 	}
 			
-	/** @return left Expression */
-		
-	
+	/** Returns the left branch of the expression tree.
+	 * @return left Expression 
+	 */
+			
 	public Expression getLeft() {
 		return left;
 	}
 
-	/** @return right Expression */
+	/** Returns the right branch of the expression tree.
+	 * @return right Expression 
+	 */
+	
 	
 	public Expression getRight() {
 		return right;
 	}
 
-	/** toString method */
+	/**
+	 * Redefinition of toString().
+	 * @return a string representation
+	 */	
+	
 	@Override
 	public String toString() {
 		return "OperateurBinaire [op=" + op + ", left=" + left + ", right="

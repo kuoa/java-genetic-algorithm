@@ -7,22 +7,32 @@ import pobj.algogen.IIndividu;
 
 public class ValeurCible implements Environnement {
 
+	/** target value */
 	private double value;
-
-	/** Environment dependent value */
-
-	/** @return ValeurCible with a random base value */
+	
+	/**
+	 * Create a new evaluation environment.
+	 */
+	
 	public ValeurCible() {
 		Random r = new Random();
 		value = r.nextDouble();
 	}
 
-	/** @return ValeurCible with from a given @param value */
+	/**
+	 * Create a new evaluation environment.
+	 * @param value the target value
+	 */
 	public ValeurCible(double value) {
 		this.value = value;
 	}
 
-	/** @return the current adaptation of the individual to the environment */
+	/**
+	 * Evaluates the individual on the current environment.
+	 * @param i the individual being evaluated
+	 * @return the new fitness value
+	 */
+	
 	@Override
 	public double eval(IIndividu i) {
 
@@ -31,14 +41,20 @@ public class ValeurCible implements Environnement {
 
 	}
 
-	/** @return value */
+	/**
+	 * Returns the target value.
+	 * @return target value
+	 */
 	public double getValue() {
 		return value;
 	}
 
-	/** @return a redefiniton of the toString method */
+	/**
+	 * Redefinition of toString().
+	 * @return a string representation
+	 */
 	public String toString() {
-		return "Valeur cible: " + value;
+		return "[** Target Value : " + value + " **]\n";
 	}
 
 }

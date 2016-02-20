@@ -4,13 +4,17 @@ import java.util.Random;
 
 public class ExpressionFactory {
 
-	private static final int MAXVARIABLE = 2;		/** Number of max variables */
-	private static Random generator = new Random(); /** Random generator */
+	/** Number of max variables */
+	private static final int MAXVARIABLE = 2;
+	
+	/** Random generator */
+	private static Random generator = new Random(); 
 
 	/** Constructs a expression having as 
 	 * @param op operator {@link Operator}, PLUS, MOINS, MULT, DIV
 	 * @param left  left Expression
 	 * @param right right Expression
+	 * @return a new expression
 	 */
 	
 	public static Expression createOperatorBinaire(Operator op,
@@ -19,8 +23,9 @@ public class ExpressionFactory {
 		return new OperateurBinaire(op, left, right);
 	}
 	
-	/** Constructs a constant having the 
-	 * @param value
+	/** Constructs a constant.
+	 * @param value, constant value
+	 * @return a constant Expression
 	 */
 	
 	public static Expression createConstant(double value) {
@@ -28,8 +33,10 @@ public class ExpressionFactory {
 		return new Constante(value);
 	}
 	
-	/** Constructs a variable having rank 
-	 * @param rang in the variables array
+	/** Constructs a variable having the specified index 
+	 * in the expression container.
+	 * @param rang, index in the variables array
+	 * @return a new variable Expression
 	 */
 
 	public static Expression createVariable(int rang) {
@@ -37,7 +44,8 @@ public class ExpressionFactory {
 		return new Variable(rang);
 	}
 
-	/** Constructs a random environment of size	 
+	/** Constructs a random evaluation environment.
+	 * @return a new evaluation environment	 
 	 */
 	
 	public static EnvVal createRandomEnvironment() {
@@ -53,7 +61,10 @@ public class ExpressionFactory {
 		return e;
 	}
 	
-	/** Constructs a random expression of maximum @param depth */
+	/** Constructs a random expression having a maximum tree depth. 
+	 * @param depth, maximum depth
+	 * @return a random Expression
+	 */
 
 	public static Expression createRandomExpression(int depth) {
 

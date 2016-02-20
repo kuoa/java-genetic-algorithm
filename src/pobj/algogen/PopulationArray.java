@@ -2,7 +2,10 @@ package pobj.algogen;
 
 import java.util.Arrays;
 
-/** This class implements a PopulationArray */
+/** 
+ * This class implements a PopulationArray 
+ * @author kuoa
+ */
 
 public class PopulationArray {
 
@@ -15,23 +18,26 @@ public class PopulationArray {
 	/** actual number of individuals */
 	private int size = 0;
 
-	/** Initialising the individuals array */
+	/** Initializing the individuals array */
 
 	public PopulationArray() {
 		individus = new IIndividu[POP_SIZE];
 	}
 
-	/** @return current array size */
+	/**
+	 * Returns the population size.
+	 * @return the population size.
+	 */
 
 	public int size() {
 		return size;
 	}
 
 	/**
-	 * Add a individual to the current population if the array is full, raise
-	 * ArrayIndexOutOfBoundsException
+	 * Add a individual to the current population.
+	 * If the array is full, raise ArrayIndexOutOfBoundsException.
 	 * 
-	 * @param individu
+	 * @param individu, new individual
 	 */
 
 	public void add(IIndividu individu) {
@@ -43,7 +49,10 @@ public class PopulationArray {
 		}
 	}
 
-	/** @return a string representation of the individuals */
+	/**
+	 * Returns a string representation of the individuals (IndividuDouble)
+	 * @return a string representation 
+	 */	
 
 	@Override
 	public String toString() {
