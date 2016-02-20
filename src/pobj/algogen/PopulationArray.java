@@ -10,7 +10,7 @@ public class PopulationArray {
 	private static final int POP_SIZE = 20;
 
 	/** array containg the individuals */
-	private Individu[] individus;
+	private IIndividu[] individus;
 
 	/** actual number of individuals */
 	private int size = 0;
@@ -18,7 +18,7 @@ public class PopulationArray {
 	/** Initialising the individuals array */
 
 	public PopulationArray() {
-		individus = new Individu[POP_SIZE];
+		individus = new IIndividu[POP_SIZE];
 	}
 
 	/** @return current array size */
@@ -34,7 +34,7 @@ public class PopulationArray {
 	 * @param individu
 	 */
 
-	public void add(Individu individu) {
+	public void add(IIndividu individu) {
 		if (size < individus.length) {
 			individus[size] = individu;
 			size++;

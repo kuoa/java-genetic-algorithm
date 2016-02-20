@@ -1,7 +1,7 @@
 package pobj.algogen;
 
 public interface Environnement {
-	
-	public double eval (Individu i);
+			
+	public double eval (IIndividu i);
 
 }

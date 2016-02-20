@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import pobj.algogen.arith.IndividuExpression;
+import pobj.arith.EnvVal;
+
 public class Population {
 
 	/** arrayList containg the individuals */
-	private ArrayList<Individu> individus;
+	private ArrayList<IIndividu> individus;
 
 	/** array size */
 	private int size = 0;
@@ -15,7 +18,7 @@ public class Population {
 	/** Initializing the individuals arrayList */
 
 	public Population() {
-		individus = new ArrayList<Individu>();
+		individus = new ArrayList<IIndividu>();
 	}
 
 	/** @return ArrayList size */
@@ -27,7 +30,7 @@ public class Population {
 	 * Add a @param individu to the current population
 	 */
 
-	void add(Individu individu) {
+	void add(IIndividu individu) {
 
 		individus.add(individu);
 		++size;
@@ -39,8 +42,21 @@ public class Population {
 
 		String s = "";
 
-		for (Individu i : individus) {
+		for (IIndividu i : individus) {
 			s += i.toString() + "\n";
+		}
+
+		return s;
+	}
+	
+	public String toString(EnvVal e) {
+
+		String s = "";
+
+		for (IIndividu i : individus) {
+			
+			IndividuExpression ie = (IndividuExpression) i;
+			s += ie.toString(e) + "\n";
 		}
 
 		return s;
@@ -81,7 +97,7 @@ public class Population {
 
 	public void evaluer(Environnement e) {
 
-		for (Individu i : individus) {
+		for (IIndividu i : individus) {
 
 			double newFitness = e.eval(i);
 			i.setFitness(newFitness);
@@ -109,7 +125,7 @@ public class Population {
 
 			if (rand <= probability) {
 
-				Individu ind = individus.get(i);
+				IIndividu ind = individus.get(i);
 				ind.muter();
 
 				// System.out.println("Mutation done");
@@ -142,7 +158,7 @@ public class Population {
 
 		for (int i = 0; i < cloneSize; i++) {
 
-			Individu individu = individus.get(i);
+			IIndividu individu = individus.get(i);
 			newPop.add(individu.clone());
 
 			// System.out.println("New individual by clone: " +
@@ -152,12 +168,12 @@ public class Population {
 
 		for (int i = 0; i < reprodSize; i++) {
 
-			Individu mother = individus.get(i);
+			IIndividu mother = individus.get(i);
 
 			int fatherIndex = r.nextInt(cloneSize);
 
-			Individu father = individus.get(fatherIndex);
-			Individu newIndividu = father.croiser(mother);
+			IIndividu father = individus.get(fatherIndex);
+			IIndividu newIndividu = father.croiser(mother);
 
 			newPop.add(newIndividu);
 

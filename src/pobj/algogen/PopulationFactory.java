@@ -1,5 +1,8 @@
 package pobj.algogen;
 
+import pobj.algogen.arith.IndividuExpression;
+import pobj.algogen.doubles.IndividuDouble;
+
 public class PopulationFactory {
 
 	/**
@@ -13,7 +16,7 @@ public class PopulationFactory {
 
 		for (int i = 0; i < size; i++) {
 
-			population.add(new Individu());
+			population.add(new IndividuDouble());
 		}
 
 		return population;
@@ -29,8 +32,7 @@ public class PopulationFactory {
 		Population population = new Population();
 
 		for (int i = 0; i < size; i++) {
-
-			population.add(new Individu());
+			population.add(new IndividuExpression());
 		}
 
 		return population;

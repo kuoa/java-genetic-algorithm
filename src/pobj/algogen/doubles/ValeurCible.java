@@ -1,6 +1,9 @@
-package pobj.algogen;
+package pobj.algogen.doubles;
 
 import java.util.Random;
+
+import pobj.algogen.Environnement;
+import pobj.algogen.IIndividu;
 
 public class ValeurCible implements Environnement {
 
@@ -21,9 +24,9 @@ public class ValeurCible implements Environnement {
 
 	/** @return the current adaptation of the individual to the environment */
 	@Override
-	public double eval(Individu i) {
+	public double eval(IIndividu i) {
 
-		double res = value - i.getValeurPropre();
+		double res = value - (double)i.getValeurPropre();
 		return 1 / (Math.pow(res, 2));
 
 	}
