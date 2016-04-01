@@ -7,103 +7,86 @@ import java.util.Random;
 import pobj.algogen.arith.IndividuExpression;
 import pobj.arith.EnvVal;
 
-/**
- * The population container.
- * @author kuoa
- *
- */
+public class Population<T> {
 
-public class Population {
-
-	/** arrayList containig the individuals */	
-	private ArrayList<IIndividu> individus;
+	/** arrayList containg the individuals */
+	private ArrayList<IIndividu<T>> individus;
 
 	/** array size */
 	private int size = 0;
 
 	/** Initializing the individuals arrayList */
+
 	public Population() {
-		individus = new ArrayList<IIndividu>();
+		individus = new ArrayList<IIndividu<T>>();
 	}
 
-	/**
-	 * Returns the population size.
-	 * @return the population size.
-	 */
+	/** @return ArrayList size */
 	public int size() {
 		return size;
 	}
+	
+	public IIndividu<T> get (int i){
+		return individus.get(i);
+	}
 
 	/**
-	 * Adds a new individual to the current population.
-	 * @param individual
+	 * Add a @param individu to the current population
 	 */
 
-	void add(IIndividu individu) {
+	void add(IIndividu<T> individu) {
 
 		individus.add(individu);
 		++size;
 	}
 
-	/**
-	 * Returns a string representation of the individuals (IndividuDouble)
-	 * @return a string representation 
-	 */
-	
+	/** @return a string representation of the individuals */
 	@Override
 	public String toString() {
 
 		String s = "";
 
-		for (IIndividu i : individus) {
+		for (IIndividu<T> i : individus) {
 			s += i.toString() + "\n";
 		}
 
 		return s;
 	}
-	/**
-	 * Returns a string representation of the individuals (IndividuExpression) 
-	 * @param e the array of expression variables
-	 * @return a string representation 	 
-	 */
 	
 	public String toString(EnvVal e) {
 
 		String s = "";
 
-		for (IIndividu i : individus) {
-			
+		for (IIndividu<T> i : individus) {
+						
 			IndividuExpression ie = (IndividuExpression) i;
 			s += ie.toString(e) + "\n";
 		}
+
 		return s;
 	}
+	
 
 	/**
-	 * Simulates the evolution of the current population, by creating a new
-	 * generation. We use a environment that allows the calculation
-	 * of the new fitness (survival of the fittest). 
-	 * We keep the %20 of the most apt individuals and we allow them to reproduce 
-	 * in order to create the next generation. 
-	 * Mutations may also occur.
-	 *
-	 * @param e the evaluation environment
-	 * @return a new population
+	 * Simulates the evolution of the current population, by creating a new @return
+	 * generation. We use a environnement @param e that allows the calculation
+	 * of the new fitness (survival of the fittest). We keep the %20 of the most
+	 * apt individuals and we allow them to reproduce in order to create the
+	 * next generation. Random mutations may also occur.
 	 */
 
-	public Population evoluer(Environnement e) {
+	public Population<T> evoluer(Environnement<T> e) {
 
 		Random r = new Random();
 		int min = 5;
 		int max = 15;
 
 		double prob = (r.nextInt(max - min + 1) + min) / 100.0;
-	
 		System.out.println("Probabilty of mutation: " + prob + " %");
 
 		evaluer(e);
 
-		Population newPop = reproduire();
+		Population<T> newPop = reproduire();
 
 		newPop.muter(prob);
 
@@ -114,13 +97,12 @@ public class Population {
 
 	/**
 	 * Updates the fitness of all the individuals present in the current
-	 * environment. 
-	 * @param e the evaluation environment
+	 * environment @param e
 	 */
 
-	public void evaluer(Environnement e) {
+	public void evaluer(Environnement<T> e) {
 
-		for (IIndividu i : individus) {
+		for (IIndividu<T> i : individus) {
 
 			double newFitness = e.eval(i);
 			i.setFitness(newFitness);
@@ -131,8 +113,8 @@ public class Population {
 	}
 
 	/**
-	 * Creates a new mutation of the current individual, based on the probability of mutation. 
-	 * @param probability of mutation
+	 * Creates a new mutation of the current individual, based on a @param
+	 * probability
 	 */
 
 	private void muter(double probability) {
@@ -148,7 +130,7 @@ public class Population {
 
 			if (rand <= probability) {
 
-				IIndividu ind = individus.get(i);
+				IIndividu<T> ind = individus.get(i);
 				ind.muter();
 
 				// System.out.println("Mutation done");
@@ -162,13 +144,12 @@ public class Population {
 	/**
 	 * Creates a new population by simulating a reproduction behavior. We keep
 	 * the %20 of the most apt individuals and we allow them to reproduce in
-	 * order to create the next generation. 
-	 * @return the next generation after reproduction
+	 * order to create the @return next generation.
 	 */
 
-	private Population reproduire() {
+	private Population<T> reproduire() {
 
-		Population newPop = new Population();
+		Population<T> newPop = new Population<T>();
 		Random r = new Random();
 
 		int size = individus.size();
@@ -182,7 +163,7 @@ public class Population {
 
 		for (int i = 0; i < cloneSize; i++) {
 
-			IIndividu individu = individus.get(i);
+			IIndividu<T> individu = individus.get(i);
 			newPop.add(individu.clone());
 
 			// System.out.println("New individual by clone: " +
@@ -192,12 +173,12 @@ public class Population {
 
 		for (int i = 0; i < reprodSize; i++) {
 
-			IIndividu mother = individus.get(i);
+			IIndividu<T> mother = individus.get(i);
 
 			int fatherIndex = r.nextInt(cloneSize);
 
-			IIndividu father = individus.get(fatherIndex);
-			IIndividu newIndividu = father.croiser(mother);
+			IIndividu<T> father = individus.get(fatherIndex);
+			IIndividu<T> newIndividu = father.croiser(mother);
 
 			newPop.add(newIndividu);
 

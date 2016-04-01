@@ -1,25 +1,21 @@
 package pobj.algogen;
 
+import agent.control.IControleur;
+import pobj.algogen.agent.IndividuControler;
 import pobj.algogen.arith.IndividuExpression;
 import pobj.algogen.doubles.IndividuDouble;
-
-/**
- * A factory of populations.
- * @author kuoa
- *
- */
+import pobj.arith.Expression;
 
 public class PopulationFactory {
 
 	/**
-	 * Creates a PopulationArray containing individuals.
-	 * @param size the population size
-	 * @return a new PopulationArray
+	 * Creates a @return PopulationArray containing individuals in an array of @param
+	 * size
 	 */
 
-	public static PopulationArray createRandomPopulationArray(int size) {
+	public static Population<Double> createRandomPopulationArray(int size) {
 
-		PopulationArray population = new PopulationArray();
+		Population<Double> population = new Population<Double>();
 
 		for (int i = 0; i < size; i++) {
 
@@ -30,36 +26,31 @@ public class PopulationFactory {
 	}
 
 	/**
-	 * Creates a Population containing (IndividuDouble) individuals.
-	 * @param size the population size
-	 * @return a new Population
+	 * Creates a @return Population containing individuals in an arrayList of @param
+	 * size
 	 */
 
-	public static Population randomPopulationIDouble(int size) {
+	public static Population<Expression> createRandomExpressionPopulation(int size) {
 
-		Population population = new Population();
+		Population<Expression> population = new Population<Expression>();
 
 		for (int i = 0; i < size; i++) {
-			population.add(new IndividuDouble());
+			population.add(new IndividuExpression());
 		}
 
 		return population;
 	}
 	
-	/**
-	 * Creates a Population containing (IndividuExpression) individuals.
-	 * @param size the population size
-	 * @return a new Population
-	 */
+	public static Population<IControleur> createRandomControllerPopulation(int size, int nbRules) {
 
-	public static Population randomPopulationIExpression(int size) {
-
-		Population population = new Population();
+		Population<IControleur> population = new Population<IControleur>();
 
 		for (int i = 0; i < size; i++) {
-			population.add(new IndividuExpression());
+			population.add(new IndividuControler(nbRules));
 		}
-		
+
 		return population;
 	}
+	
+	
 }

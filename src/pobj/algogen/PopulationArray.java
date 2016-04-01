@@ -1,61 +1,47 @@
 package pobj.algogen;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-/** 
- * This class implements a PopulationArray 
- * @author kuoa
- */
+/** This class implements a PopulationArray */
 
-public class PopulationArray {
-
-	/** maximum array size */
-	private static final int POP_SIZE = 20;
-
+public class PopulationArray<T> {
+		
 	/** array containg the individuals */
-	private IIndividu[] individus;
+	private ArrayList<IIndividu<T>> individus;
 
-	/** actual number of individuals */
-	private int size = 0;
-
-	/** Initializing the individuals array */
+	/** Initialising the individuals array */
 
 	public PopulationArray() {
-		individus = new IIndividu[POP_SIZE];
+		individus = new ArrayList<IIndividu<T>>();
 	}
 
-	/**
-	 * Returns the population size.
-	 * @return the population size.
-	 */
+	/** @return current array size */
 
 	public int size() {
-		return size;
+		return individus.size();
 	}
 
 	/**
-	 * Add a individual to the current population.
-	 * If the array is full, raise ArrayIndexOutOfBoundsException.
+	 * Add a individual to the current population if the array is full, raise
+	 * ArrayIndexOutOfBoundsException
 	 * 
-	 * @param individu, new individual
+	 * @param individu
 	 */
 
-	public void add(IIndividu individu) {
-		if (size < individus.length) {
-			individus[size] = individu;
-			size++;
-		} else {
-			throw new ArrayIndexOutOfBoundsException("Plus de place !");
-		}
+	public void add(IIndividu<T> individu) {
+		individus.add(individu);
 	}
 
-	/**
-	 * Returns a string representation of the individuals (IndividuDouble)
-	 * @return a string representation 
-	 */	
+	/** @return a string representation of the individuals */
 
 	@Override
 	public String toString() {
-		return Arrays.toString(individus);
+		String s = "";
+		
+		for(IIndividu<T> i : individus){
+			s += i.toString() + "\n";
+		}
+		
+		return s;
 	}
 }

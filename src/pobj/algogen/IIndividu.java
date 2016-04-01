@@ -1,65 +1,36 @@
 package pobj.algogen;
 
-/**
- * A common interface for all individuals.
- * 
- * @author kuoa
- *
- */
 
-public interface IIndividu extends Comparable<IIndividu> {
+public interface IIndividu <T> extends Comparable<IIndividu<T>> {
 
-	/**
-	 * Redefinition of toString().
-	 * @return a string representation
-	 */
-
+	/** Redefinition of toString() */
 	public String toString();
 
-	/**
-	 * Returns the proper value.
-	 * @return a Object (Expression or Double)
-	 */
+	/** Access the value associated with the individual @return valeurPropre */
+	public T getValeurPropre();
 
-	public Object getValeurPropre();
-
-	/**
-	 * Returns the fitness value.
-	 * @return fitness
-	 */
-
+	/** @return the fitness value */
 	public double getFitness();
-	
-	/**
-	 * Updates the fitness
-	 * @param newFitness value
-	 */
-	
+
+	/** Set a @param newFitness value */
 	public void setFitness(double newFitness);
 
 	/**
-	 * Compares two individuals based on their fitness.
-	 * @param i the individual beeing compared to
-	 * @return -1 | 0 | 1
+	 * Compares the fitness of the current individual with individual @param i, @return
+	 * -1 | 0 | 1
 	 */
-	
-	public int compareTo(IIndividu i);	
-		
-	/**
-	 * Mates two individuals based on their distinctive features.
-	 * @param i the individual beeing mated with
-	 * @return a new individual
-	 */
-	
-	public IIndividu croiser(IIndividu i);
-	
-	/**
-	 * Produces a mutation on the individual
-	 */
+	public int compareTo(IIndividu<T> i);
 
+	/**
+	 * @return a new individual with common traits of the current individual and @param
+	 *         i
+	 */
+	public IIndividu<T> croiser(IIndividu<T> i);
+
+	/** Mutates the current individual */
 	public void muter();
 
 	/** @return a clone of the current individual */
-	public IIndividu clone();
+	public IIndividu<T> clone();
 
 }

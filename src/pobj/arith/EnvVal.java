@@ -10,10 +10,7 @@ public class EnvVal {
 	/** variables array size */
 	private int size;
 
-	/** 
-	 * Constructs a evaluation environment.
-	 *  @param size environment size 
-	 */
+	/** Constructs a environment @param size */
 	
 	public EnvVal(int size) {
 
@@ -21,10 +18,7 @@ public class EnvVal {
 		this.size = size;
 	}
 	
-	/** Insert a new variable. 
-	 * @param value of the variable
-	 * @param index in the variables array 
-	 */
+	/** Sets a variable of @param value at @param index in the variables array */
 	
 	public void setVariable(int index, double value)
 			throws ArrayIndexOutOfBoundsException {
@@ -38,10 +32,7 @@ public class EnvVal {
 		
 	}
 	
-	/** Returns the value associated with the variable index
-	 * @param index, variable index
-	 * @return variable value
-	 */
+	/** Returns the value associated with the variable at @param index */
 	
 	public double getValue(int index) 
 			throws ArrayIndexOutOfBoundsException {
@@ -53,13 +44,11 @@ public class EnvVal {
 			throw new ArrayIndexOutOfBoundsException("[Size: " + size + " index: " + index + "]");
 		}
 	}
-				
-	/**
-	 * Redefinition of toString().
-	 * @return a string representation
-	 */
-	
+
 	@Override
+	
+	/** toString method */
+	
 	public String toString() {
 		return "EnvVal [variables=" + Arrays.toString(variables) + ", size="
 				+ size + "]";

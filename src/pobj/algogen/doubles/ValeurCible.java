@@ -5,56 +5,40 @@ import java.util.Random;
 import pobj.algogen.Environnement;
 import pobj.algogen.IIndividu;
 
-public class ValeurCible implements Environnement {
+public class ValeurCible implements Environnement<Double> {
 
-	/** target value */
 	private double value;
-	
-	/**
-	 * Create a new evaluation environment.
-	 */
-	
+
+	/** Environment dependent value */
+
+	/** @return ValeurCible with a random base value */
 	public ValeurCible() {
 		Random r = new Random();
 		value = r.nextDouble();
 	}
 
-	/**
-	 * Create a new evaluation environment.
-	 * @param value the target value
-	 */
+	/** @return ValeurCible with from a given @param value */
 	public ValeurCible(double value) {
 		this.value = value;
 	}
 
-	/**
-	 * Evaluates the individual on the current environment.
-	 * @param i the individual being evaluated
-	 * @return the new fitness value
-	 */
-	
+	/** @return the current adaptation of the individual to the environment */
 	@Override
-	public double eval(IIndividu i) {
+	public double eval(IIndividu<Double> i) {
 
 		double res = value - (double)i.getValeurPropre();
 		return 1 / (Math.pow(res, 2));
 
 	}
 
-	/**
-	 * Returns the target value.
-	 * @return target value
-	 */
+	/** @return value */
 	public double getValue() {
 		return value;
 	}
 
-	/**
-	 * Redefinition of toString().
-	 * @return a string representation
-	 */
+	/** @return a redefiniton of the toString method */
 	public String toString() {
-		return "[** Target Value : " + value + " **]\n";
+		return "Valeur cible: " + value;
 	}
 
 }

@@ -2,32 +2,22 @@ package pobj.arith;
 
 public class Constante implements Expression {
 
-	/** constant value */
-	private final double value;
+	private final double value;		/** constant value */
 		
-	/**
-	 * Creates a constant value. 
-	 * @param value, the constant value
-	 */
+	/** Creates a constant of @param value */
 	
 	public Constante(double value) {		
 		this.value = value;
 	}
 	
-	/** 
-	 * Evaluate the constant
-	 * @return the value of the constant
-	 */
+	/** Evaluate the constant */
 	
 	@Override
 	public double eval(EnvVal e) {
 		return value;
 	}
 	
-	/**
-	 * Redefinition of toString().
-	 * @return a string representation
-	 */	
+	/** toString method */
 	
 	@Override
 	public String toString() {

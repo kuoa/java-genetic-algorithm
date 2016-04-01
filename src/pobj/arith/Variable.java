@@ -4,19 +4,14 @@ public class Variable implements Expression {
 
 	private int rang;		/** rank in the variables array */
 
-	/**
-	 *  Constructs a variable having the specified index 
-	 * in the expression container.
-	 * @param rang, index in the variables array
-	 */
+
+	/** Constructs a variable of rank @param rang */
 	
 	public Variable(int rang) {		
 		this.rang = rang;
 	}
 
-	/** 
-	 * Evaluates the Variable in the environment.
-	 * @param e, evaluation environment */
+	/** Evaluates the Variable in the environment @param e */
 	
 	@Override
 	public double eval(EnvVal e) {
@@ -24,10 +19,7 @@ public class Variable implements Expression {
 		return e.getValue(rang);
 	}
 
-	/**
-	 * Redefinition of toString().
-	 * @return a string representation
-	 */
+	/** toString method */
 	
 	@Override	
 	public String toString() {
