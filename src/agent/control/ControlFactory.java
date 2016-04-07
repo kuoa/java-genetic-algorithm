@@ -2,6 +2,8 @@ package agent.control;
 
 import java.util.Random;
 
+import pobj.util.Generator;
+
 
 /**
  * Composant qui est responsable de produire des Controleurs et règles.
@@ -75,7 +77,7 @@ public class ControlFactory {
 	 ********************************************/
 	
 	// un generateur aléatoire (pour nextInt())
-	private static Random generateur = new Random();
+	private static Random generateur = Generator.getInstance();
 
 	/**
 	 * Crée une règle aléatoire  de type Sensor basée sur un motif aléatoire.
@@ -88,7 +90,7 @@ public class ControlFactory {
 		StringBuffer obs = new StringBuffer();
 
 		for (int i = 0; i < 8; i++) {
-			double rand = Math.random();
+			double rand = Generator.nextDouble();
 			if (rand > 0.20)
 				// 80% joker
 				obs.append('?'); // ContenuCase.ANY

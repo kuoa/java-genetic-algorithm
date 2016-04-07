@@ -2,10 +2,12 @@ package pobj.arith;
 
 import java.util.Random;
 
+import pobj.util.Generator;
+
 public class ExpressionFactory {
 
 	private static final int MAXVARIABLE = 2;		/** Number of max variables */
-	private static Random generator = new Random(); /** Random generator */
+	private static Random generator = Generator.getInstance(); /** Random generator */
 
 	/** Constructs a expression having as 
 	 * @param op operator {@link Operator}, PLUS, MOINS, MULT, DIV

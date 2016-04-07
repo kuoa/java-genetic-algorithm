@@ -6,6 +6,7 @@ import pobj.algogen.arith.FonctionCible;
 import pobj.arith.EnvVal;
 import pobj.arith.Expression;
 import pobj.arith.ExpressionFactory;
+import pobj.util.Generator;
 
 public class PopulationMainExpressions {
 
@@ -14,6 +15,8 @@ public class PopulationMainExpressions {
 		int size = 10; 
 				
 		//ValeurCible v = new ValeurCible(0.3);
+		
+		Generator.setSeed(10);
 		
 		EnvVal e = ExpressionFactory.createRandomEnvironment();
 		

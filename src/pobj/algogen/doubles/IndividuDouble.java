@@ -4,6 +4,7 @@ import java.util.Random;
 
 import pobj.algogen.AbstractIndividu;
 import pobj.algogen.IIndividu;
+import pobj.util.Generator;
 
 /**
  * Class representing an individual
@@ -14,7 +15,7 @@ public class IndividuDouble extends AbstractIndividu<Double> implements
 		
 	/** Make a individual associated with a random value */
 	public IndividuDouble() {
-		super(new Random().nextDouble());		
+		super(Generator.nextDouble());		
 	}
 
 	/** Make a individual associated with a given value @param valeurPropre */
@@ -87,7 +88,7 @@ public class IndividuDouble extends AbstractIndividu<Double> implements
 
 	public void muter() {
 
-		Random r = new Random();
+		Random r = Generator.getInstance();
 		fitness = r.nextDouble();
 		System.out.println("new fitness: " + fitness);
 	}

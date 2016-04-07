@@ -24,7 +24,8 @@ public class LabyActivePanel extends LabyPanel implements ISimpleObserver{
 	public void update() {
 		try {
 			// force update when laby-state has changed		
-			System.out.println("Update Graphics");
+			//System.out.println("Update Graphics");
+			
 			updateGraphics();
 			
 			Thread.sleep(100);

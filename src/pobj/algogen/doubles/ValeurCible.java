@@ -4,6 +4,7 @@ import java.util.Random;
 
 import pobj.algogen.Environnement;
 import pobj.algogen.IIndividu;
+import pobj.util.Generator;
 
 public class ValeurCible implements Environnement<Double> {
 
@@ -13,7 +14,7 @@ public class ValeurCible implements Environnement<Double> {
 
 	/** @return ValeurCible with a random base value */
 	public ValeurCible() {
-		Random r = new Random();
+		Random r = Generator.getInstance();
 		value = r.nextDouble();
 	}
 

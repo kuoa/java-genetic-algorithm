@@ -6,22 +6,32 @@ import agent.control.IControleur;
 import agent.laby.ChargeurLabyrinthe;
 import agent.laby.Labyrinthe;
 import agent.laby.interf.LabyWiewer;
+import pobj.algogen.AlgoGenParameter;
 import pobj.algogen.IIndividu;
 import pobj.algogen.Population;
 import pobj.algogen.PopulationFactory;
 import pobj.algogen.agent.SimulationCible;
+import pobj.util.Configuration;
+import pobj.util.Generator;
 
-public class PopulationMainController {
+public class PopulationMainController implements AlgoGenParameter {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
+		
+		Configuration conf = new Configuration();		
+		conf.loadFromFile(FILE_NAME);
+				
+		int popSize = Integer.parseInt(conf.get(POP_SIZE));		
+		int nbRules = Integer.parseInt(conf.get(NB_RULES));
+		int nbSteps = Integer.parseInt(conf.get(NB_STEPS));
+		int seed = Integer.parseInt(conf.get(RAND_SEED)); 
+		
+		String labyFile = conf.get(LABY_FILE);
 
-		int popSize = 10; 
-		int nbRules = 6;
-								
-		String labyFile = "goal.mze"; 
-		int nbSteps = 50; 	
 		Labyrinthe laby = null;
 		
+		Generator.setSeed(seed);
+				
 		try {
 			laby = ChargeurLabyrinthe.chargerLabyrinthe(labyFile);
 			
@@ -39,7 +49,7 @@ public class PopulationMainController {
 	
 		System.out.println(population.toString());
 	
-		for (int i = 0; i < 50000; i++){
+		for (int i = 0; i < 10000; i++){
 			
 			population = population.evoluer(simCible);												
 			

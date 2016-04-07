@@ -6,6 +6,7 @@ import java.util.Random;
 
 import pobj.algogen.arith.IndividuExpression;
 import pobj.arith.EnvVal;
+import pobj.util.Generator;
 
 public class Population<T> {
 
@@ -77,7 +78,7 @@ public class Population<T> {
 
 	public Population<T> evoluer(Environnement<T> e) {
 
-		Random r = new Random();
+		Random r = Generator.getInstance();
 		int min = 5;
 		int max = 15;
 
@@ -119,7 +120,7 @@ public class Population<T> {
 
 	private void muter(double probability) {
 
-		Random r = new Random();
+		Random r = Generator.getInstance();
 
 		for (int i = 1; i < individus.size(); i++) {
 
@@ -150,7 +151,7 @@ public class Population<T> {
 	private Population<T> reproduire() {
 
 		Population<T> newPop = new Population<T>();
-		Random r = new Random();
+		Random r = Generator.getInstance();
 
 		int size = individus.size();
 		int cloneSize = (int) (size * 0.2);

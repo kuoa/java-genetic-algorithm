@@ -28,7 +28,7 @@ public class SimpleObservable implements ISimpleObservable  {
 		
 		for (ISimpleObserver o : observers){
 			o.update();
-			System.out.println("observers notified");
+			//System.out.println("observers notified");
 		}
 	}
 	
