@@ -189,4 +189,15 @@ public class Population<T> {
 
 		return newPop;
 	}
+	
+	public double getFitnessSum(){
+		double sum = 0;
+		
+		for (IIndividu<T> i : individus){
+			sum += i.getFitness();
+		}
+		
+		return sum;
+	}
+	
 }
