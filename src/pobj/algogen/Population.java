@@ -15,10 +15,12 @@ public class Population<T> {
 
 	/** array size */
 	private int size = 0;
+	
+	private IEvolution<T> strategy = null;
 
 	/** Initializing the individuals arrayList */
 
-	public Population() {
+	public Population() {		
 		individus = new ArrayList<IIndividu<T>>();
 	}
 
@@ -78,19 +80,10 @@ public class Population<T> {
 
 	public Population<T> evoluer(Environnement<T> e) {
 
-		Random r = Generator.getInstance();
-		int min = 5;
-		int max = 15;
-
-		double prob = (r.nextInt(max - min + 1) + min) / 100.0;
-		System.out.println("Probabilty of mutation: " + prob + " %");
-
 		evaluer(e);
 
 		Population<T> newPop = reproduire();
-
-		newPop.muter(prob);
-
+	
 		newPop.evaluer(e); // In order to keep it sorted
 
 		return newPop;
@@ -118,7 +111,7 @@ public class Population<T> {
 	 * probability
 	 */
 
-	private void muter(double probability) {
+	public void muter(double probability) {
 
 		Random r = Generator.getInstance();
 
@@ -149,45 +142,18 @@ public class Population<T> {
 	 */
 
 	private Population<T> reproduire() {
-
-		Population<T> newPop = new Population<T>();
-		Random r = Generator.getInstance();
-
-		int size = individus.size();
-		int cloneSize = (int) (size * 0.2);
-		int reprodSize = size - cloneSize;
-
-		// less than 5 individuals
-		if (cloneSize < 1) {
-			cloneSize = 1;
+		
+		if(this.strategy == null){			
+			this.strategy = new GenerationalEvolution<>();		
+			
+			System.out.println(this.strategy);
+			
+			System.out.println("No strategy provided, selecting [GenerationalEvolution] by default");
+			
 		}
+		
+		return strategy.reproduire(this);
 
-		for (int i = 0; i < cloneSize; i++) {
-
-			IIndividu<T> individu = individus.get(i);
-			newPop.add(individu.clone());
-
-			// System.out.println("New individual by clone: " +
-			// individu.toString());
-
-		}
-
-		for (int i = 0; i < reprodSize; i++) {
-
-			IIndividu<T> mother = individus.get(i);
-
-			int fatherIndex = r.nextInt(cloneSize);
-
-			IIndividu<T> father = individus.get(fatherIndex);
-			IIndividu<T> newIndividu = father.croiser(mother);
-
-			newPop.add(newIndividu);
-
-			// System.out.println("New individual by reproduction: " +
-			// newIndividu.toString());
-		}
-
-		return newPop;
 	}
 	
 	public double getFitnessSum(){
@@ -198,6 +164,30 @@ public class Population<T> {
 		}
 		
 		return sum;
+	}
+	
+	public IEvolution<T> getStrategy(){
+		return strategy;
+	}
+	
+	public void setStrategy(IEvolution<T> strategy){
+		this.strategy = strategy;
+	}
+	
+	public void removeLast(){
+		individus.remove(size - 1);
+		size--;
+	}
+
+	public void setSize(int size){
+		this.size = size;
+	}
+	public ArrayList<IIndividu<T>> getIndividus(){
+		return individus;
+	}
+	
+	public void setIndividus(ArrayList<IIndividu<T>> newIndividus){
+		this.individus = newIndividus;
 	}
 	
 }

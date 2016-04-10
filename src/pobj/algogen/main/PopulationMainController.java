@@ -7,7 +7,10 @@ import agent.laby.ChargeurLabyrinthe;
 import agent.laby.Labyrinthe;
 import agent.laby.interf.LabyWiewer;
 import pobj.algogen.AlgoGenParameter;
+import pobj.algogen.GenerationalEvolution;
+import pobj.algogen.IEvolution;
 import pobj.algogen.IIndividu;
+import pobj.algogen.NicheEvolution;
 import pobj.algogen.Population;
 import pobj.algogen.PopulationFactory;
 import pobj.algogen.agent.SimulationCible;
@@ -25,13 +28,17 @@ public class PopulationMainController implements AlgoGenParameter {
 		int nbRules = Integer.parseInt(conf.get(NB_RULES));
 		int nbSteps = Integer.parseInt(conf.get(NB_STEPS));
 		int seed = Integer.parseInt(conf.get(RAND_SEED)); 
-		
+		int nbGen = Integer.parseInt(conf.get(NB_GENERATIONS));
+		boolean genEvolution = Boolean.parseBoolean(conf.get(GEN_EVOLUTION));
+						
 		String labyFile = conf.get(LABY_FILE);
-
+		
 		Labyrinthe laby = null;
 		
+		IEvolution<IControleur> strategy = null;
+		
 		Generator.setSeed(seed);
-				
+												
 		try {
 			laby = ChargeurLabyrinthe.chargerLabyrinthe(labyFile);
 			
@@ -42,18 +49,24 @@ public class PopulationMainController implements AlgoGenParameter {
 		}
 		
 		
-		SimulationCible simCible = new SimulationCible(laby, nbSteps);		
-		System.out.println("EnvVal : " + simCible.toString());
+		SimulationCible simCible = new SimulationCible(laby, nbSteps);				
 		
 		Population<IControleur> population = PopulationFactory.createRandomControllerPopulation(popSize, nbRules);
-	
-		System.out.println(population.toString());
-	
-		for (int i = 0; i < 10000; i++){
+
+		if(genEvolution){
+			strategy =  new GenerationalEvolution<>();
+		}
+		else{
+			strategy = new NicheEvolution<>();
+		}
+		 
+		population.setStrategy(strategy);
+				
+		for (int i = 0; i < nbGen; i++){
 			
-			population = population.evoluer(simCible);												
-			
+			population = population.evoluer(simCible);								
 		}	
+		
 		IIndividu<IControleur> bestIndividual = population.get(0);
 		
 		new LabyWiewer(laby, bestIndividual.getValeurPropre(), nbSteps);
