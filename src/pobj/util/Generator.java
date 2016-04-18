@@ -24,6 +24,5 @@ public class Generator {
 	
 	public static void setSeed(long seed){
 		r.setSeed(seed);
-	}
-	
+	}	
 }
